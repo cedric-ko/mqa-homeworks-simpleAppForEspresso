@@ -38,7 +38,7 @@ public class IdlingResourcesTest {
     }
 
     @Test
-    public void testOpenGalleryAndCheckSeven() {
+    public void testOpenGallery() {
         ViewInteraction menu = onView(isAssignableFrom(AppCompatImageButton.class));
         menu.check(matches(isDisplayed()));
         menu.perform(click());
@@ -49,8 +49,13 @@ public class IdlingResourcesTest {
         ViewInteraction recyclerView = onView(withId(R.id.recycle_view));
         recyclerView.check(matches(isDisplayed()));
 
-        ViewInteraction seven = onView(withText("7"));
-        seven.check(matches(isDisplayed()));
-        seven.check(matches(withText("7")));
+        recyclerView.check(matches(CustomViewMatcher.recyclerViewSizeMatcher(10)));
+
+        recyclerView.check(CustomViewAssertions.isRecycleView());
+
+
+        ViewInteraction itemSeven = onView(withText("7"));
+        itemSeven.check(matches(isDisplayed()));
+        itemSeven.check(matches(withText("7")));
     }
 }
